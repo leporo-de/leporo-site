@@ -15,14 +15,14 @@ Der Produktions-Build wird mit `npm run build` erzeugt. Die Kontaktseite verwend
 
 - Pull Requests: Format-, Typ- und Build-Prüfung
 - `main`: automatisches Deployment über GitHub Actions auf GitHub Pages
-- aktuelle Vorschau: `https://leporo-de.github.io/leporo-site/`
+- Produktion: `https://leporo.de/`
 
 Für die spätere Custom Domain `leporo.de`:
 
 1. DNS auf GitHub Pages umstellen.
 2. Die Custom Domain in den Repository-Pages-Einstellungen setzen.
 3. `public/CNAME` mit `leporo.de` ergänzen.
-4. In `astro.config.mjs` `site` auf `https://leporo.de` setzen und `base` entfernen.
+4. GitHub stellt automatisch ein HTTPS-Zertifikat für `leporo.de` und `www.leporo.de` bereit.
 
 ## Vor Go-live
 
