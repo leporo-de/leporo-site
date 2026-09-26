@@ -5,7 +5,10 @@ import { sitePath } from "../lib/sitePath";
 <footer>
   <div class="container footer-grid">
     <div>
-      <strong>Leporo GmbH</strong>
+      <a class="footer-brand" href={sitePath()} aria-label="Leporo Startseite">
+        <img src={sitePath("leporo-logo.svg")} alt="" width="40" height="40" />
+        <strong>Leporo GmbH</strong>
+      </a>
       <p>Individuelle Servicelösungen aus Waltrop.</p>
     </div>
     <div>
@@ -35,6 +38,17 @@ import { sitePath } from "../lib/sitePath";
   p {
     margin-top: 0.4rem;
     color: #b8cbc6;
+  }
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+  }
+  .footer-brand img {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.65rem;
   }
   a {
     color: inherit;
