@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { sitePath } from "../lib/sitePath";
 import { services } from "../data/services";
 ---
 
@@ -18,7 +19,7 @@ import { services } from "../data/services";
           bleiben persönlich erreichbar.
         </p>
         <div class="actions">
-          <a class="button" href="/kontakt/">Projekt besprechen</a>
+          <a class="button" href={sitePath("kontakt/")}>Kontakt aufnehmen</a>
           <a class="button secondary" href="#leistungen">Leistungen ansehen</a>
         </div>
       </div>
@@ -45,7 +46,7 @@ import { services } from "../data/services";
       <div class="grid cards">
         {
           services.map((service, index) => (
-            <a class="card" href={`/leistungen/${service.slug}/`}>
+            <a class="card" href={sitePath(`leistungen/${service.slug}/`)}>
               <span class="number">0{index + 1}</span>
               <h3>{service.title}</h3>
               <p>{service.summary}</p>
@@ -90,7 +91,7 @@ import { services } from "../data/services";
       <p>
         Schildern Sie uns kurz Ihre Aufgabe. Wir melden uns persönlich zurück.
       </p>
-      <a class="button" href="/kontakt/">Kontakt aufnehmen</a>
+      <a class="button" href={sitePath("kontakt/")}>Kontakt aufnehmen</a>
     </div>
   </section>
 </BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sitePath } from "../../lib/sitePath";
 import { services, type Service } from "../../data/services";
 
 export function getStaticPaths() {
@@ -39,7 +40,7 @@ const { service } = Astro.props as { service: Service };
           Lassen Sie uns den Bedarf klären.
         </h2>
       </div>
-      <a class="button" href="/kontakt/">Unverbindlich anfragen</a>
+      <a class="button" href={sitePath("kontakt/")}>Unverbindlich anfragen</a>
     </div>
   </section>
 </BaseLayout>

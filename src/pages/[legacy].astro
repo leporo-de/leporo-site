@@ -1,0 +1,42 @@
+---
+import { sitePath } from "../lib/sitePath";
+
+export function getStaticPaths() {
+  const redirects = {
+    inventuren: "leistungen/inventuren/",
+    akten: "leistungen/aktensanierung/",
+    "leporo-inventarsanierung": "leistungen/inventarsanierung/",
+    simkartentausch: "leistungen/sim-kartentausch/",
+    bueroreinigung: "leistungen/bueroreinigung/",
+    kontaktformular: "kontakt/",
+    "kontakt-2": "kontakt/",
+  };
+
+  return Object.entries(redirects).map(([legacy, target]) => ({
+    params: { legacy },
+    props: { target },
+  }));
+}
+
+const { target } = Astro.props;
+const destination = sitePath(target);
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content={`0;url=${destination}`} />
+    <link rel="canonical" href={new URL(destination, Astro.site)} />
+    <title>Weiterleitung – Leporo</title>
+  </head>
+  <body>
+    <p>
+      Die Seite wurde verschoben. <a href={destination}>Weiter zu Leporo</a>
+    </p>
+    <script define:vars={{ destination }}>
+      window.location.replace(destination);
+    </script>
+  </body>
+</html>

@@ -1,234 +1,71 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-
-const siteKey =
-  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "1x00000000000000000000AA";
 ---
 
 <BaseLayout
   title="Kontakt – Leporo"
-  description="Kontaktieren Sie Leporo für eine persönliche Beratung zu Ihrem Projekt."
+  description="Kontaktieren Sie Leporo persönlich per E-Mail oder Telefon."
 >
   <section class="contact-hero">
     <div class="container">
       <p class="eyebrow">Kontakt</p>
       <h1>Erzählen Sie uns von Ihrer Aufgabe.</h1>
-      <p class="lead">Wir melden uns persönlich bei Ihnen zurück.</p>
+      <p class="lead">
+        Am einfachsten erreichen Sie uns direkt per E-Mail oder Telefon.
+      </p>
     </div>
   </section>
   <section class="section">
     <div class="container contact-grid">
-      <form id="contact-form" action="/api/contact" method="post">
-        <div class="row">
-          <label
-            >Vorname<input
-              name="firstName"
-              autocomplete="given-name"
-              required
-              maxlength="80"
-            /></label
-          >
-          <label
-            >Nachname<input
-              name="lastName"
-              autocomplete="family-name"
-              required
-              maxlength="80"
-            /></label
-          >
-        </div>
-        <label
-          >E-Mail-Adresse<input
-            name="email"
-            type="email"
-            autocomplete="email"
-            required
-            maxlength="254"
-          /></label
+      <article>
+        <p class="eyebrow">Per E-Mail</p>
+        <h2>Schreiben Sie uns</h2>
+        <p>
+          Ihr E-Mail-Programm öffnet sich mit einer neuen Nachricht an Leporo.
+        </p>
+        <a
+          class="button"
+          href="mailto:info@leporo.de?subject=Anfrage%20über%20leporo.de"
+          >E-Mail an info@leporo.de</a
         >
-        <label
-          >Telefon <span>(optional)</span><input
-            name="phone"
-            type="tel"
-            autocomplete="tel"
-            maxlength="50"
-          /></label
-        >
-        <label
-          >Ihre Nachricht<textarea
-            name="message"
-            rows="7"
-            required
-            maxlength="5000"></textarea></label
-        >
-        <label class="honeypot" aria-hidden="true"
-          >Firma<input
-            name="companyWebsite"
-            tabindex="-1"
-            autocomplete="off"
-          /></label
-        >
-        <label class="consent"
-          ><input
-            name="privacy"
-            type="checkbox"
-            value="accepted"
-            required
-          /><span
-            >Ich habe die <a href="/datenschutz/" target="_blank"
-              >Datenschutzerklärung</a
-            > gelesen und stimme der Verarbeitung meiner Angaben zur Beantwortung
-            der Anfrage zu.</span
-          ></label
-        >
-        <div
-          class="cf-turnstile"
-          data-sitekey={siteKey}
-          data-action="contact"
-          data-theme="light"
-        >
-        </div>
-        <button class="button" type="submit">Nachricht senden</button>
-        <p id="form-status" class="status" role="status" aria-live="polite"></p>
-      </form>
+      </article>
       <aside>
         <p class="eyebrow">Direkt erreichbar</p>
         <h2>Leporo GmbH</h2>
         <address>Brahmsweg 2<br />45731 Waltrop</address>
         <div>
-          <a href="mailto:info@leporo.de">info@leporo.de</a><br /><a
-            href="tel:+491722136271">0172 21 36 271</a
-          >
+          <a href="mailto:info@leporo.de">info@leporo.de</a><br />
+          <a href="tel:+491722136271">0172 21 36 271</a>
         </div>
       </aside>
     </div>
   </section>
-  <script
-    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
-    async
-    defer></script>
 </BaseLayout>
-
-<script>
-  const form = document.querySelector<HTMLFormElement>("#contact-form");
-  const status = document.querySelector<HTMLElement>("#form-status");
-  form?.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const button = form.querySelector<HTMLButtonElement>(
-      "button[type='submit']",
-    );
-    if (!button || !status) return;
-    button.disabled = true;
-    status.textContent = "Ihre Nachricht wird gesendet …";
-    try {
-      const response = await fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" },
-      });
-      const result = (await response.json()) as {
-        success?: boolean;
-        message?: string;
-      };
-      if (!response.ok || !result.success)
-        throw new Error(
-          result.message || "Die Nachricht konnte nicht gesendet werden.",
-        );
-      form.reset();
-      status.textContent =
-        result.message || "Vielen Dank. Ihre Nachricht wurde gesendet.";
-      window.turnstile?.reset();
-    } catch (error) {
-      status.textContent =
-        error instanceof Error
-          ? error.message
-          : "Die Nachricht konnte nicht gesendet werden.";
-      window.turnstile?.reset();
-    } finally {
-      button.disabled = false;
-    }
-  });
-</script>
 
 <style>
   .contact-hero {
     padding-block: clamp(5rem, 11vw, 8rem);
     background: var(--mint-pale);
   }
-  .contact-hero .container {
+  .contact-hero .container,
+  article,
+  aside {
     display: grid;
-    gap: 1.4rem;
+    gap: 1.2rem;
   }
   .contact-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
-    gap: clamp(3rem, 9vw, 8rem);
+    gap: clamp(2rem, 7vw, 6rem);
   }
-  form {
-    display: grid;
-    gap: 1.2rem;
+  article,
+  aside {
+    align-content: start;
   }
-  .row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  label {
-    display: grid;
-    gap: 0.4rem;
-    font-weight: 750;
-  }
-  label span {
-    color: var(--ink-soft);
-    font-size: 0.88rem;
-    font-weight: 500;
-  }
-  input,
-  textarea {
-    width: 100%;
-    border: 1px solid #a9bab5;
-    border-radius: 0.65rem;
-    padding: 0.8rem 0.9rem;
-    background: var(--white);
-    color: var(--ink);
-  }
-  input:focus,
-  textarea:focus {
-    border-color: var(--mint-dark);
-    outline: 3px solid rgb(120 197 180 / 25%);
-  }
-  .consent {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: start;
-    font-weight: 500;
-  }
-  .consent input {
-    width: 1.1rem;
-    margin-top: 0.3rem;
-  }
-  .honeypot {
-    position: absolute;
-    left: -9999px;
-  }
-  button {
+  article .button {
     justify-self: start;
-    border: 0;
-    cursor: pointer;
-  }
-  button:disabled {
-    cursor: wait;
-    opacity: 0.6;
-  }
-  .status {
-    min-height: 1.6rem;
-    color: var(--mint-dark);
-    font-weight: 700;
   }
   aside {
-    display: grid;
-    align-content: start;
-    gap: 1rem;
     padding: 2rem;
     border-radius: var(--radius);
     background: var(--sand);
@@ -241,13 +78,8 @@ const siteKey =
     text-underline-offset: 0.2em;
   }
   @media (max-width: 740px) {
-    .contact-grid,
-    .row {
+    .contact-grid {
       grid-template-columns: 1fr;
     }
   }
 </style>
-
-<script is:inline>
-  window.turnstile = window.turnstile || undefined;
-</script>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sitePath } from "../../lib/sitePath";
 ---
 
 <BaseLayout
@@ -32,7 +33,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           Reinigung: Wir hören zu, strukturieren die Aufgabe und sorgen für eine
           saubere Umsetzung.
         </p>
-        <a class="button" href="/kontakt/">Lernen wir uns kennen</a>
+        <a class="button" href={sitePath("kontakt/")}>Lernen wir uns kennen</a>
       </div>
     </div>
   </section>

@@ -1,6 +1,6 @@
 # leporo-site
 
-Statische Website der Leporo GmbH auf Basis von [Astro](https://astro.build/) und Cloudflare Pages. Der einzige dynamische Teil ist das Kontaktformular unter `functions/api/contact.ts`.
+Statische Website der Leporo GmbH auf Basis von [Astro](https://astro.build/), veröffentlicht über GitHub Pages.
 
 ## Entwicklung
 
@@ -9,41 +9,25 @@ npm install
 npm run dev
 ```
 
-Der Astro-Entwicklungsserver zeigt die statischen Seiten. Um zusätzlich die Cloudflare Pages Function zu testen:
+Der Produktions-Build wird mit `npm run build` erzeugt. Die Kontaktseite verwendet bewusst nur einen `mailto:`-Link und benötigt weder Backend noch Secrets.
 
-```bash
-npm run build
-cp .env.example .dev.vars
-npm run preview
-```
+## Deployment
 
-Cloudflare stellt offizielle Turnstile-Testschlüssel bereit. Der Mailversand benötigt lokal ein Remote-/Mock-Binding oder wird erst in der Cloudflare-Vorschau vollständig getestet.
+- Pull Requests: Format-, Typ- und Build-Prüfung
+- `main`: automatisches Deployment über GitHub Actions auf GitHub Pages
+- aktuelle Vorschau: `https://leporo-de.github.io/leporo-site/`
 
-## Deployment auf Cloudflare Pages
+Für die spätere Custom Domain `leporo.de`:
 
-- Production branch: `main`
-- Build command: `npm run build`
-- Build directory: `dist`
-- Node.js: aktuelle LTS-Version
-
-### Einmalige Cloudflare-Konfiguration
-
-1. Repository als Pages-Projekt verbinden.
-2. `leporo.de` als Domain im Cloudflare-Konto verwalten und als Custom Domain verbinden.
-3. Turnstile-Widget für `leporo.de` anlegen.
-4. Build-Variable `PUBLIC_TURNSTILE_SITE_KEY` setzen.
-5. Verschlüsseltes Function-Secret `TURNSTILE_SECRET_KEY` setzen.
-6. Cloudflare Email Service für `leporo.de` onboarden; `info@leporo.de` als Zieladresse verifizieren.
-7. Den `EMAIL`-Send-Binding aus `wrangler.jsonc` übernehmen bzw. im Dashboard prüfen.
-
-`CONTACT_TO` und `CONTACT_FROM` sind standardmäßig auf `info@leporo.de` und `website@leporo.de` gesetzt.
+1. DNS auf GitHub Pages umstellen.
+2. Die Custom Domain in den Repository-Pages-Einstellungen setzen.
+3. `public/CNAME` mit `leporo.de` ergänzen.
+4. In `astro.config.mjs` `site` auf `https://leporo.de` setzen und `base` entfernen.
 
 ## Vor Go-live
 
 - Angaben in Impressum und Kontaktdaten geschäftlich prüfen.
-- Datenschutzerklärung rechtlich prüfen und die konkrete Cloudflare-Konfiguration ergänzen.
-- Reale Turnstile-Schlüssel hinterlegen.
-- Kontaktformular in der Cloudflare Preview vollständig testen.
+- Datenschutzerklärung gegen die tatsächliche GitHub-Pages-Konfiguration rechtlich prüfen.
 - Fehlende historische Bild- und Logodateien ggf. durch aktuelle Assets ersetzen.
 
 ## Herkunft
