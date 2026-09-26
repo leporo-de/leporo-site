@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Über uns – Leporo"
+  description="Lernen Sie das Leporo-Team aus Waltrop kennen: vielseitig, erfahren und zuverlässig."
+>
+  <section class="about-hero">
+    <div class="container">
+      <p class="eyebrow">Das Leporo-Team</p>
+      <h1>Vielseitigkeit und Know-how für jede Aufgabe.</h1>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container about-grid">
+      <div>
+        <p class="eyebrow">Über uns</p>
+        <h2>
+          Klein genug für persönlichen Kontakt. Erfahren genug für
+          anspruchsvolle Projekte.
+        </h2>
+      </div>
+      <div class="copy">
+        <p>
+          Wir sind ein Unternehmen aus Waltrop und kümmern uns zuverlässig um
+          Ihr Anliegen. Unser Team verbindet praktische Erfahrung mit der
+          Flexibilität, sich schnell auf neue Aufgaben einzustellen.
+        </p>
+        <p>
+          Ob Schadensfall, Inventur, technisches Rollout-Projekt oder laufende
+          Reinigung: Wir hören zu, strukturieren die Aufgabe und sorgen für eine
+          saubere Umsetzung.
+        </p>
+        <a class="button" href="/kontakt/">Lernen wir uns kennen</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about-hero {
+    padding-block: clamp(5rem, 13vw, 10rem);
+    background: linear-gradient(115deg, var(--ink) 0 67%, var(--mint) 67%);
+    color: var(--white);
+  }
+  .about-hero h1 {
+    max-width: 55rem;
+  }
+  .about-hero .eyebrow {
+    color: #aee5d9;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 8vw, 7rem);
+  }
+  .copy {
+    display: grid;
+    align-content: start;
+    justify-items: start;
+    gap: 1.4rem;
+    color: var(--ink-soft);
+    font-size: 1.08rem;
+  }
+  @media (max-width: 760px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .about-hero {
+      background: var(--ink);
+    }
+  }
+</style>

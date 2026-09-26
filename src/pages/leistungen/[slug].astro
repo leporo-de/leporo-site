@@ -1,0 +1,101 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { services, type Service } from "../../data/services";
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props as { service: Service };
+---
+
+<BaseLayout title={`${service.title} – Leporo`} description={service.summary}>
+  <section class="service-hero">
+    <div class="container narrow">
+      <p class="eyebrow">{service.kicker}</p>
+      <h1>{service.title}</h1>
+      <p class="lead">{service.summary}</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container service-grid">
+      <div>
+        <p class="eyebrow">Unsere Leistung</p>
+        <h2>{service.promise}</h2>
+        <p class="lead intro">{service.intro}</p>
+      </div>
+      <ul>
+        {service.points.map((point) => <li>{point}</li>)}
+      </ul>
+    </div>
+  </section>
+  <section class="section tint">
+    <div class="container closing">
+      <div>
+        <p class="eyebrow">Ihr Projekt</p><h2>
+          Lassen Sie uns den Bedarf klären.
+        </h2>
+      </div>
+      <a class="button" href="/kontakt/">Unverbindlich anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .service-hero {
+    padding-block: clamp(5rem, 12vw, 9rem);
+    background:
+      radial-gradient(
+        circle at 85% 20%,
+        var(--mint) 0 9rem,
+        transparent 9.1rem
+      ),
+      var(--mint-pale);
+  }
+  .narrow {
+    display: grid;
+    max-width: 58rem;
+    gap: 1.4rem;
+  }
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(2rem, 8vw, 7rem);
+    align-items: start;
+  }
+  .intro {
+    margin-top: 1.5rem;
+  }
+  ul {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+  }
+  li {
+    padding: 1.35rem 0 1.35rem 2rem;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(var(--mint-dark), var(--mint-dark)) no-repeat
+      0.2rem 1.9rem / 0.65rem 0.15rem;
+  }
+  .closing {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  @media (max-width: 720px) {
+    .service-grid {
+      grid-template-columns: 1fr;
+    }
+    .closing {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+</style>

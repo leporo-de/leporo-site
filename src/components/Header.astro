@@ -1,0 +1,98 @@
+---
+const path = Astro.url.pathname;
+const nav = [
+  { href: "/#leistungen", label: "Leistungen" },
+  { href: "/ueber-uns/", label: "Über uns" },
+  { href: "/kontakt/", label: "Kontakt" },
+];
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/" aria-label="Leporo Startseite">
+      <span class="mark" aria-hidden="true">L</span>
+      <span>leporo</span>
+    </a>
+    <nav aria-label="Hauptnavigation">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            aria-current={path === item.href ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <a class="button header-cta" href="/kontakt/">Anfrage senden</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 1px solid rgb(216 228 224 / 75%);
+    background: rgb(255 255 255 / 92%);
+    backdrop-filter: blur(14px);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    min-height: 4.75rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-right: auto;
+    font-size: 1.2rem;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+  .mark {
+    display: grid;
+    width: 2.2rem;
+    height: 2.2rem;
+    place-items: center;
+    border-radius: 0.7rem 0.7rem 0.7rem 0.1rem;
+    background: var(--mint);
+    color: var(--ink);
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+  }
+  nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+  nav a {
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  nav a:hover,
+  nav a[aria-current="page"] {
+    color: var(--ink);
+  }
+  .header-cta {
+    min-height: 2.65rem;
+  }
+  @media (max-width: 720px) {
+    .bar {
+      gap: 0.75rem;
+      min-height: 4.2rem;
+    }
+    nav {
+      display: none;
+    }
+    .header-cta {
+      padding-inline: 0.85rem;
+      font-size: 0.88rem;
+    }
+  }
+</style>

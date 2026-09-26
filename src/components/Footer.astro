@@ -1,0 +1,48 @@
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <strong>Leporo GmbH</strong>
+      <p>Individuelle Servicelösungen aus Waltrop.</p>
+    </div>
+    <div>
+      <a href="mailto:info@leporo.de">info@leporo.de</a><br />
+      <a href="tel:+491722136271">0172 21 36 271</a>
+    </div>
+    <nav aria-label="Rechtliches">
+      <a href="/impressum/">Impressum</a>
+      <a href="/datenschutz/">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  footer {
+    padding-block: 3rem;
+    border-top: 1px solid var(--line);
+    background: var(--ink);
+    color: var(--white);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr auto;
+    gap: 2rem;
+    align-items: start;
+  }
+  p {
+    margin-top: 0.4rem;
+    color: #b8cbc6;
+  }
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+  }
+  nav {
+    display: grid;
+    gap: 0.5rem;
+  }
+  @media (max-width: 680px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

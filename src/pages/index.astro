@@ -1,0 +1,211 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { services } from "../data/services";
+---
+
+<BaseLayout
+  title="Leporo – Individuelle Servicelösungen"
+  description="Leporo ist Ihr Ansprechpartner für Inventar- und Aktensanierung, Inventuren, SIM-Kartentausch und Büroreinigung."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Leporo GmbH · Waltrop</p>
+        <h1>Wir finden die Lösung für Ihre Aufgabe.</h1>
+        <p class="lead">
+          Von der Sanierung nach Schadensfällen bis zu europaweiten
+          Technikprojekten: Wir planen pragmatisch, handeln zuverlässig und
+          bleiben persönlich erreichbar.
+        </p>
+        <div class="actions">
+          <a class="button" href="/kontakt/">Projekt besprechen</a>
+          <a class="button secondary" href="#leistungen">Leistungen ansehen</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="shape one"></div><div class="shape two"></div><div
+          class="shape three"
+        >
+        </div>
+        <p><span>Planen.</span><span>Machen.</span><span>Lösen.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="leistungen">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Unsere Leistungen</p>
+        <h2>Vielseitigkeit und Know-how für jede Aufgabe.</h2>
+        <p class="lead">
+          Fünf Leistungen, ein Anspruch: klare Abläufe, sorgfältige Arbeit und
+          verlässliche Kommunikation.
+        </p>
+      </div>
+      <div class="grid cards">
+        {
+          services.map((service, index) => (
+            <a class="card" href={`/leistungen/${service.slug}/`}>
+              <span class="number">0{index + 1}</span>
+              <h3>{service.title}</h3>
+              <p>{service.summary}</p>
+              <span class="more">Mehr erfahren →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container confidence">
+      <div>
+        <p class="eyebrow">So arbeiten wir</p>
+        <h2>Persönlich. Flexibel. Verlässlich.</h2>
+      </div>
+      <ol>
+        <li>
+          <strong>Verstehen</strong><span
+            >Wir klären Bedarf, Rahmen und Ziel.</span
+          >
+        </li>
+        <li>
+          <strong>Planen</strong><span
+            >Sie erhalten einen transparenten, praktikablen Ablauf.</span
+          >
+        </li>
+        <li>
+          <strong>Umsetzen</strong><span
+            >Unser Team übernimmt zuverlässig die Durchführung.</span
+          >
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section cta">
+    <div class="container cta-box">
+      <p class="eyebrow">Sprechen wir darüber</p>
+      <h2>Was können wir für Sie lösen?</h2>
+      <p>
+        Schildern Sie uns kurz Ihre Aufgabe. Wir melden uns persönlich zurück.
+      </p>
+      <a class="button" href="/kontakt/">Kontakt aufnehmen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    overflow: hidden;
+    padding-block: clamp(4rem, 10vw, 8rem);
+    background: linear-gradient(135deg, var(--white) 45%, var(--mint-pale));
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: clamp(2rem, 8vw, 7rem);
+    align-items: center;
+  }
+  .hero-copy {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .hero-art {
+    position: relative;
+    display: grid;
+    min-height: 30rem;
+    place-items: center;
+  }
+  .hero-art p {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    color: var(--ink);
+    font-family: Georgia, serif;
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    transform: rotate(-4deg);
+  }
+  .shape {
+    position: absolute;
+    border-radius: 48% 52% 60% 40%;
+  }
+  .shape.one {
+    width: 24rem;
+    height: 24rem;
+    background: var(--mint);
+    transform: rotate(20deg);
+  }
+  .shape.two {
+    right: -1rem;
+    bottom: 1rem;
+    width: 10rem;
+    height: 10rem;
+    border: 2px solid var(--ink);
+  }
+  .shape.three {
+    top: 0;
+    left: 0;
+    width: 6rem;
+    height: 6rem;
+    background: #f0c66d;
+  }
+  .confidence {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .confidence ol {
+    display: grid;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    counter-reset: steps;
+    list-style: none;
+  }
+  .confidence li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.2rem 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #d9d1c3;
+  }
+  .confidence li::before {
+    grid-row: span 2;
+    content: "0" counter(steps);
+    counter-increment: steps;
+    color: var(--mint-dark);
+    font-weight: 850;
+  }
+  .confidence span {
+    color: var(--ink-soft);
+  }
+  .cta-box {
+    display: grid;
+    justify-items: start;
+    gap: 1.2rem;
+    padding: clamp(2rem, 6vw, 5rem);
+    border-radius: 2rem;
+    background: var(--mint-pale);
+  }
+  @media (max-width: 800px) {
+    .hero-grid,
+    .confidence {
+      grid-template-columns: 1fr;
+    }
+    .hero-art {
+      min-height: 20rem;
+    }
+    .shape.one {
+      width: 18rem;
+      height: 18rem;
+    }
+  }
+</style>

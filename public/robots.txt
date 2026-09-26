@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://leporo.de/sitemap-index.xml
