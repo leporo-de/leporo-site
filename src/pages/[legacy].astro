@@ -26,6 +26,11 @@ const destination = sitePath(target);
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; base-uri 'self'; form-action 'none'; script-src 'none'; style-src 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
     <meta name="robots" content="noindex" />
     <meta http-equiv="refresh" content={`0;url=${destination}`} />
     <link rel="canonical" href={new URL(destination, Astro.site)} />
@@ -35,8 +40,5 @@ const destination = sitePath(target);
     <p>
       Die Seite wurde verschoben. <a href={destination}>Weiter zu Leporo</a>
     </p>
-    <script define:vars={{ destination }}>
-      window.location.replace(destination);
-    </script>
   </body>
 </html>
