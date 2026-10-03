@@ -11,6 +11,8 @@ npm run dev
 
 Der Produktions-Build wird mit `npm run build` erzeugt. Die Kontaktseite verwendet bewusst nur einen `mailto:`-Link und benötigt weder Backend noch Secrets.
 
+Der Produktions-Build führt `npm run privacy:check` aus. Der Check schlägt fehl, wenn generierte Seiten Skripte, iframes, Formulare, Zugriffe auf Browser-Speicher, bekannte Tracker oder extern geladene Ressourcen enthalten. Damit bleibt das statische, einwilligungsfreie Auslieferungsmodell erhalten.
+
 ## Deployment
 
 - Pull Requests: Format-, Typ- und Build-Prüfung
@@ -27,7 +29,6 @@ Für die spätere Custom Domain `leporo.de`:
 ## Vor Go-live
 
 - Angaben in Impressum und Kontaktdaten geschäftlich prüfen.
-- Datenschutzerklärung gegen die tatsächliche GitHub-Pages-Konfiguration rechtlich prüfen.
 - Fehlende historische Bild- und Logodateien ggf. durch aktuelle Assets ersetzen.
 
 ## Herkunft
